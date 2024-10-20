@@ -62,6 +62,7 @@ def alg(f, x0=0, y0=0, d=1, e=0.01, cl=True, center=True, col='viridis', level=0
 
     #levels = [f(x0, y0) + e * k for k in np.arange(-15, 15)]
     CS1 = ax2.contour(X, Y, Z, [f(x0, y0) + 2 * e * k for k in np.arange(-1, 15)], linewidths=1.5, cmap='Reds')
+    ax2.contour(X,Y,Z, [0], lw=1.5, colors='black')
     CS2 = ax2.contour(X, Y, Z, [f(x0, y0) + 2 * e * k for k in np.arange(-15, 0)], linewidths=1.5, cmap='Blues_r')
 
     #ax2.clabel(CS1)
