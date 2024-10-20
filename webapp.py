@@ -95,43 +95,75 @@ st.title("Generatore di grafico dei livelli in 2D con input simbolico")
 # )
 
 # Collect user input
-func_str_f = st.text_input(r"Inserisci una funzione $f(x,y)$ secondo le operazioni in codice Python (e.g., scrivi exp(x*y+x**2) per la funzione $f(x,y) \, = \,e^{x\,y\,x^2}$)", value="exp(x*y*x**2)")
-vincolo = st.checkbox("Aggiungi il vincolo", value = False)
-func_str_g = st.text_input(r"Inserisci una funzione $g$ tale che è visualizzato il vincolo $g(x,y)^{-1}(\{0\})$  (e.g., x**2+y**2-1 per la curva $x^2+y^2=1$)", value="x**2+y**2-1")
-x0 = st.number_input(r"$x_0$ (default 0):", value=0.0, step=0.1)
-y0 = st.number_input(r"$y_0$ (default 0):", value=0.0, step=0.1)
+
+#st.subheader(r"Scegli la funzione $f$")
+func_str_f = st.text_input(r"Inserisci una funzione $f(x,y)$ secondo le operazioni in codice Python (e.g., scrivi exp(x*y+x**2) per la funzione $f(x,y) \, = \,e^{x\,y+x^2}$)", value="exp(x*y*x**2)")
+
+
+
+#st.subheader(r"Scegli il quadrato in 2D dove visualizzare i livelli di $f$", )
+#st.write("Scegli il centro del quadrato")
+col1, col2 = st.columns(2)
+with col1:
+    x0 = st.number_input(r"Scegli $x_0$ (default 0):", value=0.0, step=0.1)
+with col2:
+    y0 = st.number_input(r"Scegli $y_0$ (default 0):", value=0.0, step=0.1)
+    
+center = st.checkbox(r"Mostra $(x_0,y_0)$", value=False)
+
 lato = st.number_input(
-    r"lato del quadrato centrato in $(x_0, y_0)$ visualizzato (default 1):", 
+    r"Scegli la lunghezza del lato del quadrato centrato in $(x_0, y_0)$ visualizzato (default 1):", 
     value=1.00, 
     step=0.01,
     format ="%f"
 )
+
+# Colormap selection
+colormap = st.selectbox(r"Scegli un colorset per i livelli di $f$:", ['viridis', 'Greys', 'autumn', 'coolwarm'])
+
 passo_attorno_f_0 =st.number_input(
-    label=r"passo attorno a $f_0=f(x_0,y_0)$ (default 0.01):",
+    label=r"Scegli il passo con cui visualizzare le curv di livello, con livelli attorno a $f_0=f(x_0,y_0)$ (default 0.01):",
     min_value=0.0000000,
     step=0.0000001,
     max_value=10.0000,
     value = 0.01,
     format = "%f"
 )
-center = st.checkbox(r"Mostra $(x_0,y_0)$", value=False)
-curva_livello_f = st.checkbox(r"Scegli se visualizzare una curva di livello di $f$", value=False)
-livello_f = st.number_input(
-    label="Scegli il livello",
-    value=0.0000,
-    step=0.0001,
-    format="%f"
-)
 
-# Colormap selection
-colormap = st.selectbox("Scegli un colore:", ['viridis', 'Greys', 'autumn', 'coolwarm'])
+
+#st.subheader("Aggiungi, opzionalmente, l'espressione del vincolo")
+vincolo = st.checkbox("Aggiungi il vincolo 👇", value = False)
+if vincolo:
+    func_str_g = st.text_input(
+        r"Inserisci $g(x,y)$ (e.g., scrivi x**2 + 2*y-1 per la curva $x^2+2\,y=1$), per il vincolo $g(x,y)^{-1}(\{0\})$", 
+        #r"Inserisci una funzione $g$ tale che è visualizzato il vincolo $g(x,y)^{-1}(\{0\})$  (e.g., scrivi x**2 + y ** 2-1 per la curva $x^2+y^2=1$)", 
+        value="x**2+y**2-1"
+    )
+#else:
+   # st.write("Seleziona la checkbox per inserire un vincolo")
+
+#st.subheader(r"Scegli un eventuale livello di $f$ che vuoi visualizzare nel quadrato scelto")
+curva_livello_f = st.checkbox(r"Scegli se visualizzare una curva di livello di $f$ 👇", value=False)
+if curva_livello_f:
+    livello_f = st.number_input(
+        label="Scegli il livello",
+        value=0.0000,
+        step=0.0001,
+        format="%f"
+    )
+else:
+    livello_f=0
+    #st.write("Seleziona la checkbox per inserire il livello che vuoi visualizzare")
+
+
 
 # When the user clicks the button, generate the plot
 if st.button("Genera i grafici"):
     try:
         # Convert the input function to a callable function
         f = symbolic_to_callable(func_str_f)
-        g = symbolic_to_callable(func_str_g)
+        if vincolo:
+            g = symbolic_to_callable(func_str_g)
 
         # Generate and display the contour plot
         if vincolo == False:
