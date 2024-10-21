@@ -23,6 +23,10 @@ def f_log(x):
 def f_tan(x):
     return np.tan(x)
 
+def f_H(x):
+    return np.heaviside(x, 0)
+
+
 # Dictionary mapping function names to their implementations
 functions = {
     "Polynomial: x^2 - 3x + 2": f_poly,
@@ -31,6 +35,7 @@ functions = {
     "Exponential: exp(x)": f_exp,
     "Logarithm: log(x+1)": f_log,
     "Tangent: tan(x)": f_tan,
+    "Salto": f_H
 }
 
 # Add a button for restarting the function
