@@ -2,6 +2,15 @@ import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
 import random
+import sympy as sp
+
+
+def symbolic_to_callable(symbolic_str):
+    """Convert a symbolic function (string) into a Python callable function."""
+    x = sp.symbols('x')  # Define the symbols
+    symbolic_expr = sp.sympify(symbolic_str)  # Convert the input string to a sympy expression
+    func = sp.lambdify((x), symbolic_expr, modules='numpy')  # Convert sympy expression to callable
+    return func
 
 # Define a set of possible functions to choose from
 def f_poly(x):
@@ -29,47 +38,59 @@ def f_H(x):
 
 # Dictionary mapping function names to their implementations
 functions = {
-    "Polynomial: x^2 - 3x + 2": f_poly,
-    "Sine: sin(x)": f_sin,
-    "Cosine: cos(x)": f_cos,
-    "Exponential: exp(x)": f_exp,
-    "Logarithm: log(x+1)": f_log,
-    "Tangent: tan(x)": f_tan,
+    "Polinomio: x^2 - 3x + 2": f_poly,
+    "Seno: sin(x)": f_sin,
+    "Coseno: cos(x)": f_cos,
+    "Esponenziale: exp(x)": f_exp,
+    "Logaritmo: log(x+1)": f_log,
+    "Tangente: tan(x)": f_tan,
     "Salto": f_H
 }
 
-# Add a button for restarting the function
-if 'selected_function_name' not in st.session_state:
-    st.session_state.selected_function_name, st.session_state.selected_function = random.choice(list(functions.items()))
+st.title("Continuità")
 
-# When the "Restart Function" button is clicked, a new random function is selected
-if st.button("Restart Function"):
-    st.session_state.selected_function_name, st.session_state.selected_function = random.choice(list(functions.items()))
+insert_f = st.selectbox("Scegli la funzione", ['casualmente', 'inserendola'])
 
-# Get the currently selected function and its name
-selected_function_name = st.session_state.selected_function_name
-selected_function = st.session_state.selected_function
 
-# Randomly select a function
-#selected_function_name, selected_function = random.choice(list(functions.items()))
+if insert_f == "casualmente":
+    # Add a button for restarting the function
+    if 'selected_function_name' not in st.session_state:
+        st.session_state.selected_function_name, st.session_state.selected_function = random.choice(list(functions.items()))
 
-# Create the Streamlit app
-st.title("Understanding Limit and Continuity Graphically")
+    # When the "Restart Function" button is clicked, a new random function is selected
+    if st.button("Restart"):
+        st.session_state.selected_function_name, st.session_state.selected_function = random.choice(list(functions.items()))
 
-# Display the randomly selected function name
-st.write(f"Selected Function: {selected_function_name}")
+    # Get the currently selected function and its name
+    selected_function_name = st.session_state.selected_function_name
+    selected_function = st.session_state.selected_function
 
-# Define the function for plotting and computation
-#def f(x):
- #   return np.sin(x)  # Example function, you can replace it with any function.
+    # Randomly select a function
+    #selected_function_name, selected_function = random.choice(list(functions.items()))
 
-# Create the Streamlit app
-#st.title("Understanding Limit and Continuity Graphically")
+    # Create the Streamlit app
+    # Display the randomly selected function name
+    st.write(f"Funzione selezionata: {selected_function_name}")
+
+else:
+    string_f = st.text_input(
+        r"Inserisci $f(x)$ (e.g., scrivi x**2 -1 per la curva $f(x)=x^2-1$", 
+        #r"Inserisci una funzione $g$ tale che è visualizzato il vincolo $g(x,y)^{-1}(\{0\})$  (e.g., scrivi x**2 + y ** 2-1 per la curva $x^2+y^2=1$)", 
+        value="x**2-1"
+    )
+    selected_function = symbolic_to_callable(string_f)
+    selected_function_name = string_f
+    # Define the function for plotting and computation
+    #def f(x):
+    #   return np.sin(x)  # Example function, you can replace it with any function.
+
+    # Create the Streamlit app
+    #st.title("Understanding Limit and Continuity Graphically")
 
 # Input section: user selects x0, epsilon, r
-x0 = st.number_input("Enter the point x0:", value=0.0)
-epsilon = st.number_input("Choose epsilon (ε > 0):", min_value=0.01, value=0.5, step=0.01)
-r = st.number_input("Choose radius r (r > 0):", min_value=0.01, value=1.0, step=0.01)
+x0 = st.number_input(r"Inserisci $x_0$:", value=0.0)
+epsilon = st.number_input(r"Scegli epsilon $(\varepsilon > 0)$:", min_value=0.01, value=0.5, step=0.01)
+r = st.number_input(r"Segli $r$ $(r > 0)$:", min_value=0.01, value=1.0, step=0.01)
 
 f0=selected_function(x0)
 
@@ -109,10 +130,10 @@ f_low, f_high = f0 - epsilon, f0 + epsilon
 # Plotting with Matplotlib
 fig, (ax1, ax2) = plt.subplots(2,1, figsize=(10,10))
 
-ax1.plot(x1, y1, label=f'Graph of f(x)', color='blue')
+ax1.plot(x1, y1, label=f'Grafico di f(x)', color='blue')
 ax1.scatter(x0,f0, marker='x')
 
-if selected_function_name == "Tangent: tan(x)":
+if selected_function_name == "Tangente: tan(x)":
     ax1.set_ylim(-100,100)
     ax1.set_xlim(x0-np.pi/2,x0+np.pi/2)
 
@@ -121,13 +142,13 @@ if selected_function_name == "Tangent: tan(x)":
 
 
 # Plot the main graph of the function
-ax2.plot(x2, y2, label=f'Graph of f(x)', color='blue')
+ax2.plot(x2, y2, label=f'Grafico di f(x)', color='blue')
 
 # Highlight the segment (x0-r, x0+r)
-ax2.plot(x_zoom, y_zoom, color='orange', label=f'Segment around x0')
+ax2.plot(x_zoom, y_zoom, color='orange', label=f'Segmento attorno x0')
 
 # Highlight the neighborhood (f(x0)-epsilon, f(x0)+epsilon) on y-axis
-ax2.hlines([f_low, f_high], x0 - 2 * r, x0 + 2 * r, colors='green', linestyles='dashed', label='ε-neighborhood')
+ax2.hlines([f_low, f_high], x0 - 2 * r, x0 + 2 * r, colors='green', linestyles='dashed', label='ε-intorno')
 
 # Mark the point x0 and its corresponding f(x0)
 ax2.scatter([x0], [f0], color='red', zorder=5, label=f'f(x0) = {f0}')
@@ -146,15 +167,15 @@ st.pyplot(fig)
 
 # Add explanation about the limit and continuity
 st.markdown(f"""
-### Explanation:
-The graph shows the function `f(x)` plotted over a range around the point `x0 = {x0}`. 
-We have chosen an epsilon neighborhood of `{epsilon}`, i.e., the interval `({f_low}, {f_high})` on the y-axis.
+### Spiegazione:
+Il grafico mostra la funzione `f(x)` disegnata su un range attorno al punto `x0 = {x0}`. 
+Scegliamo un intorno di `{epsilon}`, i.e., l'intervallo `({f_low}, {f_high})` sull'asse y.
 
-The highlighted orange segment on the x-axis corresponds to the interval `({x0 - r}, {x0 + r})`. 
+Il segmento aranciano sull'asse x corrisponde all'intervallo `({x0 - r}, {x0 + r})`. 
 
-To visualize the concept of continuity, we see that as `x` approaches `x0`, the values of `f(x)` stay within the green dashed lines (the ε-neighborhood) 
-around `f(x0)`. This demonstrates how we can make `f(x)` as close as we like to `f(x0)` by restricting `x` to a small enough interval around `x0`.
+Per visualizzare il concetto di continuità, vediamo come `x` si avvicina a `x0`, il valore di `f(x)` sta entro le linee verdi (the ε-neighborhood) 
+attorno a `f(x0)`. Questo dimostra come possiamo rendere `f(x)` vicino quanto vogliamo a `f(x0)` restringendo `x` ad un intervallo piccolo a sufficienza di `x0`.
 
-This is a visual representation of the definition of continuity: For every ε > 0, there exists a δ > 0 such that if `|x - x0| < δ`, 
-then `|f(x) - f(x0)| < ε`.
+Questa è una rappresentazione visuale della definzione di continuità: Per ogni ε > 0, esiste un δ > 0 tale che se`|x - x0| < δ`, 
+allora `|f(x) - f(x0)| < ε`.
 """)
