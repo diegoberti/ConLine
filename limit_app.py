@@ -47,7 +47,7 @@ functions = {
     "Salto": f_H
 }
 
-st.title("Continuità")
+st.title("Visualizzazione grafica limiti e continuità")
 
 insert_f = st.selectbox("Scegli la funzione", ['casualmente', 'inserendola'])
 
