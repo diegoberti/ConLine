@@ -149,12 +149,8 @@ if vincolo:
 #st.subheader(r"Scegli un eventuale livello di $f$ che vuoi visualizzare nel quadrato scelto")
 curva_livello_f = st.checkbox(r"Scegli se visualizzare una curva di livello di $f$ 👇", value=False)
 if curva_livello_f:
-    livello_f = st.number_input(
-        label="Scegli il livello",
-        value=0.0000,
-        step=0.0001,
-        format="%f"
-    )
+    liv_f_str = st.text_input("Scegli il livello:", value=0.0)
+    livello_f = eval(liv_f_str)
 else:
     livello_f=0
     #st.write("Seleziona la checkbox per inserire il livello che vuoi visualizzare")
