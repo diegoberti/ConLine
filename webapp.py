@@ -150,7 +150,7 @@ if vincolo:
 curva_livello_f = st.checkbox(r"Scegli se visualizzare una curva di livello di $f$ 👇", value=False)
 if curva_livello_f:
     liv_f_str = st.text_input("Scegli il livello:", value=0.0)
-    livello_f = eval(liv_f_str)
+    livello_f = float(sp.sympify(liv_f_str))
 else:
     livello_f=0
     #st.write("Seleziona la checkbox per inserire il livello che vuoi visualizzare")
