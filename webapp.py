@@ -107,9 +107,11 @@ func_str_f = st.text_input(r"Inserisci una funzione $f(x,y)$ secondo le operazio
 #st.write("Scegli il centro del quadrato")
 col1, col2 = st.columns(2)
 with col1:
-    x0 = st.number_input(r"Scegli $x_0$ (default 0):", value=0.0, step=0.1)
+    str_x0 = st.text_input(r"Scegli $x_0$ (default 0):", value=0.0)
+    x0 = eval(str_x0)
 with col2:
-    y0 = st.number_input(r"Scegli $y_0$ (default 0):", value=0.0, step=0.1)
+    str_y0 = st.text_input(r"Scegli $y_0$ (default 0):", value=0.0)
+    y0 = eval(str_y0)
     
 center = st.checkbox(r"Mostra $(x_0,y_0)$", value=False)
 
