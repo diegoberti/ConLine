@@ -108,10 +108,10 @@ func_str_f = st.text_input(r"Inserisci una funzione $f(x,y)$ secondo le operazio
 col1, col2 = st.columns(2)
 with col1:
     str_x0 = st.text_input(r"Scegli $x_0$ (default 0):", value=0.0)
-    x0 = sp.simpify(str_x0)
+    x0 = sp.sympify(str_x0)
 with col2:
     str_y0 = st.text_input(r"Scegli $y_0$ (default 0):", value=0.0)
-    y0 = sp.simpify(str_y0)
+    y0 = sp.sympify(str_y0)
     
 center = st.checkbox(r"Mostra $(x_0,y_0)$", value=False)
 
