@@ -82,8 +82,8 @@ def alg(f, x0=0, y0=0, d=1, e=0.01, cl=True, center=True, col='viridis', level=0
     if Blevel==True:
         ax2.contour(X,Y, Z, [level], linewidths=3)
 
-    ax1.axis('equal')
-    ax2.axis('equal')
+    ax1.set_aspect('equal')
+    ax2.set_aspect('equal')
 
     return fig1, fig2
 
