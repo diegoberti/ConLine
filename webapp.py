@@ -92,8 +92,8 @@ def alg(f, x0=0, y0=0, d=1, e=0.01, cl=True, center=True, col='viridis', level=0
 
         vmin = Z.min()
         vmax = Z.max()
-        c_range = [0.05 * k * vmax for k in np.arange(0, 10)]
-        c_range2 = [vmin + 0.1 * k * abs(vmin) for k in np.arange(0, 10)]
+        c_range = [0.05 * k * abs(vmax) for k in np.arange(0, 10)]
+        c_range2 = [vmin + 0.05 * k * abs(vmin) for k in np.arange(0, 10)]
 
         if vmax > 0:
             ax3.contour(X, Y, Z, c_range, cmap='Reds', linewidths=1.5)
