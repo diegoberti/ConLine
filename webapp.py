@@ -40,7 +40,6 @@ def alg_vinc(f, g, x0=0,y0=0, d=1, e=0.01, cl=True, center=True, col='viridis', 
 
     if Blevel==True:
         ax.contour(X,Y, Z, [level], linewidths=3)
-        
 
     return fig 
 
@@ -104,6 +103,9 @@ def alg(f, x0=0, y0=0, d=1, e=0.01, cl=True, center=True, col='viridis', level=0
 
         #ax2.contour(X,Y,Z, [0], linewidths=1.5)
         ax3.plot_surface(X, Y, Z, cmap="coolwarm", rstride=1, cstride=1, alpha=0.2)
+        ax3.set_xlabel('X axis')
+        ax3.set_ylabel('Y axis')
+        ax3.set_zlabel('Z axis')
     
     if dplot == False:
         fig3 = fig2
