@@ -225,15 +225,15 @@ if st.button("Genera i grafici"):
         # Generate and display the contour plot
         if vincolo == False:
             fig1, fig2, fig3 = alg(f, x0, y0, lato, passo_attorno_f_0, center=center, col=colormap, level=livello_f, Blevel=curva_livello_f, dplot = dplot_f)
-            if dplot_f == False:
+            if not dplot_f:
                 st.pyplot(fig1)
                 st.pyplot(fig2)
-            if dplot_f == True:
+            if dplot_f:
                 st.pyplot(fig1)
                 st.pyplot(fig2)
                 st.pyplot(fig3)
         if vincolo:
-            fig1, fig2 = alg_vinc(f, g, x0, y0, lato, passo_attorno_f_0, center=center, col=colormap, level=livello_f, Blevel=curva_livello_f)
+            fig1, fig2 = alg_vinc(f, g, x0, y0, lato, passo_attorno_f_0, center=center, col=colormap, level=livello_f, Blevel=curva_livello_f, dplot = dplot_f)
             if dplot_f:
                 st.pyplot(fig1)
                 st.pyplot(fig2)
