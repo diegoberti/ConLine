@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.colors as colors
 import sympy as sp
 import io
-import plotly.graph_objects as go
+#import plotly.graph_objects as go
 
 def symbolic_to_callable(symbolic_str):
     """Convert a symbolic function (string) into a Python callable function."""
@@ -42,32 +42,32 @@ def alg_vinc(f, g, x0=0,y0=0, d=1, e=0.01, cl=True, center=True, col='viridis', 
     if Blevel==True:
         ax1.contour(X,Y, Z, [level], linewidths=3)
 
-    if dplot:
+    # if dplot:
 
         #fig3, ax3 = plt.figure().add_subplot(projection='3d')
-        fig2 = plt.figure(figsize=(10, 7)) 
-        ax2 = fig2.add_subplot(111, projection='3d')
+    #     fig2 = plt.figure(figsize=(10, 7)) 
+    #     ax2 = fig2.add_subplot(111, projection='3d')
 
-        vmin = Z.min()
-        vmax = Z.max()
-        c_range = [0.05 * k * vmax for k in np.arange(0, 10)]
-        c_range2 = [vmin + 0.1 * k * abs(vmin) for k in np.arange(0, 10)]
+    #     vmin = Z.min()
+    #     vmax = Z.max()
+    #     c_range = [0.05 * k * vmax for k in np.arange(0, 10)]
+    #     c_range2 = [vmin + 0.1 * k * abs(vmin) for k in np.arange(0, 10)]
 
-        #if vmax > 0:
-         #   ax2.contour(X, Y, Z, c_range, cmap='Reds', linewidths=1.5)
+    #     #if vmax > 0:
+    #      #   ax2.contour(X, Y, Z, c_range, cmap='Reds', linewidths=1.5)
 
-        #if vmin < 0:
-         #   ax2.contour(X, Y, Z, c_range2, cmap='Blues_r', linewidths=1.5)
-        ax2.contour(X,Y,Z2, [0], linewidths=1.5)
+    #     #if vmin < 0:
+    #      #   ax2.contour(X, Y, Z, c_range2, cmap='Blues_r', linewidths=1.5)
+    #     ax2.contour(X,Y,Z2, [0], linewidths=1.5)
 
-        #ax2.contour(X,Y,Z, [0], linewidths=1.5)
-        ax2.plot_surface(X, Y, Z, cmap="coolwarm", rstride=1, cstride=1, alpha=0.2)
+    #     #ax2.contour(X,Y,Z, [0], linewidths=1.5)
+    #     ax2.plot_surface(X, Y, Z, cmap="coolwarm", rstride=1, cstride=1, alpha=0.2)
     
-    if dplot == False:
-        fig2 = fig1
+    # if dplot == False:
+    #     fig2 = fig1
         
 
-    return fig1, fig2 
+    return fig1
 
 def alg(f, x0=0, y0=0, d=1, e=0.01, cl=True, center=True, col='viridis', level=0, Blevel=False, dplot =False):
     x = np.arange(x0 - d, x0 + d, 2 * d / 500)
@@ -209,7 +209,7 @@ else:
     livello_f=0
     #st.write("Seleziona la checkbox per inserire il livello che vuoi visualizzare")
 
-dplot_f = st.checkbox(r"Scegli se visualizzare il grafico in 3D", value=False)
+#dplot_f = st.checkbox(r"Scegli se visualizzare il grafico in 3D", value=False)
 
 
 
@@ -224,21 +224,24 @@ if st.button("Genera i grafici"):
 
         # Generate and display the contour plot
         if vincolo == False:
-            fig1, fig2, fig3 = alg(f, x0, y0, lato, passo_attorno_f_0, center=center, col=colormap, level=livello_f, Blevel=curva_livello_f, dplot = dplot_f)
-            if not dplot_f:
-                st.pyplot(fig1)
-                st.pyplot(fig2)
-            if dplot_f:
-                st.pyplot(fig1)
-                st.pyplot(fig2)
-                st.pyplot(fig3)
+            fig1, fig2 = alg(f, x0, y0, lato, passo_attorno_f_0, center=center, col=colormap, level=livello_f, Blevel=curva_livello_f, dplot = False)
+            st.pyplot(fig1)
+            st.pyplot(fig2)
+            # if not dplot_f:
+            #     st.pyplot(fig1)
+            #     st.pyplot(fig2)
+            # if dplot_f:
+            #     st.pyplot(fig1)
+            #     st.pyplot(fig2)
+            #     st.pyplot(fig3)
         if vincolo:
-            fig1, fig2 = alg_vinc(f, g, x0, y0, lato, passo_attorno_f_0, center=center, col=colormap, level=livello_f, Blevel=curva_livello_f, dplot = dplot_f)
-            if dplot_f:
-                st.pyplot(fig1)
-                st.pyplot(fig2)
-            if dplot_f == False:
-                st.pyplot(fig1)
+            fig1 = alg_vinc(f, g, x0, y0, lato, passo_attorno_f_0, center=center, col=colormap, level=livello_f, Blevel=curva_livello_f, dplot = False)
+            st.pyplot(fig1)
+            # if dplot_f:
+            #     st.pyplot(fig1)
+            #     st.pyplot(fig2)
+            # if dplot_f == False:
+            #     st.pyplot(fig1)
         
     except Exception as ex:
         st.error(f"Error in function input: {ex.__class__.__name__} - {ex}")
