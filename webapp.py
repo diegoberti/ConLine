@@ -127,7 +127,7 @@ st.title("Generatore di grafico dei livelli in 2D con input simbolico")
 # Collect user input
 
 #st.subheader(r"Scegli la funzione $f$")
-func_str_f = st.text_input(r"Inserisci una funzione $f(x,y)$ secondo le operazioni in codice Python (e.g., scrivi exp(x*y+x**2) per la funzione $f(x,y) \, = \,e^{x\,y+x^2}$)", value="exp(x*y*x**2)")
+func_str_f = st.text_input(r"Inserisci una funzione $f(x,y)$ secondo le operazioni in codice Python (e.g., scrivi exp(x*y+x**2) per la funzione $f(x,y) \, = \,e^{x\,y+x^2}$)", value="exp(x*y+x**2)")
 
 
 
