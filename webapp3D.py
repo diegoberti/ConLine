@@ -123,7 +123,7 @@ def alg(f, x0=0, y0=0, d=1, e=0.01, cl=True, center=True, col='viridis', level=0
          #   ax3.contour(X, Y, Z, c_range2, cmap='Blues_r', linewidths=1.5)
 
         #ax2.contour(X,Y,Z, [0], linewidths=1.5)
-        ax4.plot_surface(X, Y, Z, cmap="coolwarm", rstride=1, cstride=1, alpha=0.2)
+        ax4.plot_surface(X, Y, Z, cmap=col, rstride=1, cstride=1, alpha=0.2)
     
     if cplot == False:
         fig4 = fig2
@@ -131,7 +131,7 @@ def alg(f, x0=0, y0=0, d=1, e=0.01, cl=True, center=True, col='viridis', level=0
     return fig1, fig2, fig3, fig4
 
 # Streamlit interface
-st.title("Generatore di grafico dei livelli in 2D con input simbolico")
+st.title("Generatore di superfici grafico in 3D")
 
 func_str_f = st.text_input(r"Inserisci una funzione $f(x,y)$ secondo le operazioni in codice Python (e.g., scrivi exp(x*y+x**2) per la funzione $f(x,y) \, = \,e^{x\,y+x^2}$)", value="exp(x*y+x**2)")
 
@@ -163,21 +163,21 @@ passo_attorno_f_0 = st.number_input(
     format="%f"
 )
 
-vincolo = st.checkbox("Aggiungi il vincolo 👇", value=False)
-if vincolo:
-    func_str_g = st.text_input(
-        r"Inserisci $g(x,y)$ (e.g., scrivi x**2 + 2*y-1 per la curva $x^2+2\,y=1$), per il vincolo $g(x,y)^{-1}(\{0\})$", 
-        value="x**2+y**2-1"
-    )
+# vincolo = st.checkbox("Aggiungi il vincolo 👇", value=False)
+# if vincolo:
+#     func_str_g = st.text_input(
+#         r"Inserisci $g(x,y)$ (e.g., scrivi x**2 + 2*y-1 per la curva $x^2+2\,y=1$), per il vincolo $g(x,y)^{-1}(\{0\})$", 
+#         value="x**2+y**2-1"
+#     )
 
-#st.subheader(r"Scegli un eventuale livello di $f$ che vuoi visualizzare nel quadrato scelto")
-curva_livello_f = st.checkbox(r"Scegli se visualizzare una curva di livello di $f$ 👇", value=False)
-if curva_livello_f:
-    liv_f_str = st.text_input("Scegli il livello:", value=0.0)
-    livello_f = float(sp.sympify(liv_f_str))
-else:
-    livello_f=0
-    #st.write("Seleziona la checkbox per inserire il livello che vuoi visualizzare")
+# #st.subheader(r"Scegli un eventuale livello di $f$ che vuoi visualizzare nel quadrato scelto")
+# curva_livello_f = st.checkbox(r"Scegli se visualizzare una curva di livello di $f$ 👇", value=False)
+# if curva_livello_f:
+#     liv_f_str = st.text_input("Scegli il livello:", value=0.0)
+#     livello_f = float(sp.sympify(liv_f_str))
+# else:
+#     livello_f=0
+#     #st.write("Seleziona la checkbox per inserire il livello che vuoi visualizzare")
 
 dplot_f = st.checkbox(r"Scegli se visualizzare il grafico interattivo in 3D", value=False)
 
@@ -190,34 +190,35 @@ if st.button("Genera i grafici"):
     try:
         # Convert the input function to a callable function
         f = symbolic_to_callable(func_str_f)
-        if vincolo:
-            g = symbolic_to_callable(func_str_g)
+        # if vincolo:
+        #     g = symbolic_to_callable(func_str_g)
 
         # Generate and display the contour plot
-        if vincolo == False:
-            fig1, fig2, fig3, fig4 = alg(f, x0, y0, lato, passo_attorno_f_0, center=center, col=colormap, level=livello_f, Blevel=curva_livello_f, dplot = dplot_f, cplot = cplot_f)
-            if not dplot_f and not cplot_f:
-                st.pyplot(fig1)
-                st.pyplot(fig2)
-            if cplot_f and not dplot_f:
-                st.pyplot(fig2)
-                st.pyplot(fig4)
-            if dplot_f and not cplot_f:
-                st.pyplot(fig1)
-                st.plotly_chart(fig3)
-            if cplot_f and dplot_f:
-                st.pyplot(fig1)
-                st.plotly_chart(fig3)
-                st.pyplot(fig2)
-                st.pyplot(fig4)
+        fig1, fig2, fig3, fig4 = alg(f, x0, y0, lato, passo_attorno_f_0, center=center, col=colormap, level=0, Blevel=0, dplot = dplot_f, cplot = cplot_f)
+        # if not dplot_f and not cplot_f:
+        #     st.pyplot(fig1)
+        #     st.pyplot(fig2)
+        if cplot_f and not dplot_f:
+            #st.pyplot(fig2)
+            st.pyplot(fig4)
+        if dplot_f and not cplot_f:
+            #st.pyplot(fig1)
+            st.plotly_chart(fig3)
+        if cplot_f and dplot_f:
+            #st.pyplot(fig1)
+            st.plotly_chart(fig3)
+            #st.pyplot(fig2)
+            st.pyplot(fig4)
+        if not cplot_f and not dplot_f:
+            st.text("Scegli una tra le due opzioni o entrambe")
 
-        if vincolo:
-            fig1, fig2, fig3 = alg_vinc(f, g, x0, y0, lato, passo_attorno_f_0, center=center, col=colormap, level=livello_f, Blevel=curva_livello_f)
-            if dplot_f:
-                st.pyplot(fig1)
-                st.pyplot(fig2)
-            if dplot_f == False:
-                st.pyplot(fig1)
+        # if vincolo:
+        #     fig1, fig2, fig3 = alg_vinc(f, g, x0, y0, lato, passo_attorno_f_0, center=center, col=colormap, level=livello_f, Blevel=curva_livello_f)
+        #     if dplot_f:
+        #         st.pyplot(fig1)
+        #         st.pyplot(fig2)
+        #     if dplot_f == False:
+        #         st.pyplot(fig1)
         
     except Exception as ex:
         st.error(f"Error in function input: {ex.__class__.__name__} - {ex}")
