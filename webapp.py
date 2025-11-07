@@ -154,25 +154,25 @@ st.title("Esplora le curve di livello")
 st.subheader(r"Scegli il quadrato $Q$ centrato in $(x_0,y_0)$ e di lato $2\ell$")
 #st.write(r"Scegli il quadrato $Q$, di centro $(x_0,y_0)$ e lato $\ell$, dove visualizzare i livelli di $f$", )
 #st.write("Scegli il centro del quadrato")
-col1, col2 = st.columns(2)
+col1, col2, col3, col4 = st.columns([1, 2, 1, 2])
+
 with col1:
-    x0 = float(st.text_input(r"Scegli $x_0$:", value="0.0"))
+    st.write(r"Scegli $x_0$:")
 with col2:
-    y0 = float(st.text_input(r"Scegli $y_0$:", value="0.0"))
+    x0 = float(st.text_input("", value="0.0", key="x0"))
 
-# --- Checkbox per mostrare il punto ---
-center = st.checkbox(r"Mostra $(x_0,y_0)$", value=False)
-
-# --- Campo ℓ sulla stessa riga del testo ---
-col3, _ = st.columns([1, 4])  # col3 stretto per il testo, spazio vuoto accanto
 with col3:
-    lato = st.number_input(
-        r"Scegli $\ell$:", 
-        value=1.00, 
-        step=0.01, 
-        format="%f"
-    )
+    st.write(r"Scegli $y_0$:")
+with col4:
+    y0 = float(st.text_input("", value="0.0", key="y0"))
 
+# ---- ℓ (lato) sulla stessa riga del testo ----
+col5, col6 = st.columns([1, 3])
+with col5:
+    st.write(r"Scegli $\ell$:")
+with col6:
+    lato = st.number_input("", value=1.00, step=0.01, format="%f")
+       
 
 st.subheader(r"Scegli la funzione $f$")
 func_str_f = st.text_input(r"Inserisci una funzione $f(x,y)$ secondo le operazioni in codice Python (Attenzione: $f(x,y)$ deve essere definita Q!)", value="exp(x*y+x**2)")
