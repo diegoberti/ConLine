@@ -151,7 +151,10 @@ st.title("Esplora le curve di livello")
 # )
 
 # Collect user input
-st.markdown(r"$\bullet$ Scegli il quadrato $Q$ centrato in $(x_0,y_0)$ e di lato $2\ell$")
+st.markdown(
+    r"<span style='color:blue'>Scegli il quadrato $Q$ centrato in $(x_0, y_0)$ e di lato $2\ell$</span>",
+    unsafe_allow_html=True
+)
 #st.write(r"Scegli il quadrato $Q$, di centro $(x_0,y_0)$ e lato $\ell$, dove visualizzare i livelli di $f$", )
 #st.write("Scegli il centro del quadrato")
 
