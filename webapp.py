@@ -151,7 +151,7 @@ def alg(f, x0=0, y0=0, d=1, e=0.01, cl=True, center=True, col='viridis', level=0
 # )
 
 # Collect user input
-st.write(r"Scegli $(x_0,y_0) \in \mathbb R^2$ e $\ell >0$, che definiscono il quadrato $Q$ centrato in $(x_0,y_0)$ e di lato $2\ell$")
+st.subheader(r"Scegli $(x_0,y_0) \in \mathbb R^2$ e $\ell >0$, che definiscono il quadrato $Q$ centrato in $(x_0,y_0)$ e di lato $2\ell$")
 #st.write(r"Scegli il quadrato $Q$, di centro $(x_0,y_0)$ e lato $\ell$, dove visualizzare i livelli di $f$", )
 #st.write("Scegli il centro del quadrato")
 col1, col2 = st.columns(2)
