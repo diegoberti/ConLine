@@ -155,37 +155,57 @@ st.markdown(r"$\bullet$ Scegli il quadrato $Q$ centrato in $(x_0,y_0)$ e di lato
 #st.write(r"Scegli il quadrato $Q$, di centro $(x_0,y_0)$ e lato $\ell$, dove visualizzare i livelli di $f$", )
 #st.write("Scegli il centro del quadrato")
 
-# --- Imposta uno stile CSS più compatto e centrato ---
+# --- CSS per allineamento e rimozione dei bottoni + / - ---
 st.markdown("""
 <style>
-.inline-label {
+.inline-row {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    gap: 0.4rem;
-    font-size: 0.95rem;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
 }
-.block-container {
-    padding-top: 1rem;
+.inline-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+.inline-item input {
+    height: 2.1em;
+    padding: 0 0.3rem;
+    font-size: 0.9rem;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 </style>
 """, unsafe_allow_html=True)
 
 
-# --- Riga unica per x0, y0, ell ---
-col1, col2, col3 = st.columns([1, 1, 1])
+# --- Riga con x0, y0, ell ---
+st.markdown('<div class="inline-row">', unsafe_allow_html=True)
 
-with col1:
-    st.markdown('<div class="inline-label">Scegli $x_0$:</div>', unsafe_allow_html=True)
-    x0 = float(st.text_input("", value="0.0", key="x0"))
+# Colonna 1: x0
+st.markdown('<div class="inline-item">', unsafe_allow_html=True)
+st.latex(r"x_0")
+x0 = st.text_input("", value="0.0", key="x0", label_visibility="collapsed")
+st.markdown('</div>', unsafe_allow_html=True)
 
-with col2:
-    st.markdown('<div class="inline-label">Scegli $y_0$:</div>', unsafe_allow_html=True)
-    y0 = float(st.text_input("", value="0.0", key="y0"))
+# Colonna 2: y0
+st.markdown('<div class="inline-item">', unsafe_allow_html=True)
+st.latex(r"y_0")
+y0 = st.text_input("", value="0.0", key="y0", label_visibility="collapsed")
+st.markdown('</div>', unsafe_allow_html=True)
 
-with col3:
-    st.markdown('<div class="inline-label">Scegli $\\ell$:</div>', unsafe_allow_html=True)
-    lato = st.number_input("", value=1.00, step=0.01, format="%f", label_visibility="collapsed")
+# Colonna 3: ell
+st.markdown('<div class="inline-item">', unsafe_allow_html=True)
+st.latex(r"\ell")
+lato = st.number_input("", value=1.00, step=0.01, format="%f", label_visibility="collapsed")
+st.markdown('</div>', unsafe_allow_html=True)
+
+st.markdown('</div>', unsafe_allow_html=True)
+
 
        
 
