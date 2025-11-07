@@ -179,14 +179,27 @@ lato = st.number_input(
 # Colormap selection
 colormap = st.selectbox(r"Scegli un colorset per i livelli di $f$:", ['viridis', 'Greys', 'autumn', 'coolwarm'])
 
-passo_attorno_f_0 =st.number_input(
-    label=r"Scegli il passo con cui visualizzare le curv di livello, con livelli attorno a $f_0=f(x_0,y_0)$ (default 0.01):",
-    min_value=0.0000000,
-    step=0.0000001,
-    max_value=10.0000,
-    value = 0.01,
-    format = "%f"
+# Instead of st.number_input
+passo_attorno_f_0 = st.text_input(
+    label=r"Scegli il passo con cui visualizzare le curve di livello, con livelli attorno a $f_0=f(x_0,y_0)$ (default 0.01):",
+    value="0.01"
 )
+
+# Convert input to float and validate
+try:
+    passo_attorno_f_0 = float(passo_attorno_f_0)
+except ValueError:
+    st.error("Per favore, inserisci un numero valido.")
+
+
+#passo_attorno_f_0 =st.number_input(
+ #   label=r"Scegli il passo con cui visualizzare le curv di livello, con livelli attorno a $f_0=f(x_0,y_0)$ (default 0.01):",
+  #  min_value=0.0000000,
+   # step=0.0000001,
+   # max_value=10.0000,
+    #value = 0.01,
+    #format = "%f"
+#)
 
 
 #st.subheader("Aggiungi, opzionalmente, l'espressione del vincolo")
