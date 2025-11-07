@@ -151,8 +151,8 @@ st.title("Generatore di grafico dei livelli in 2D con input simbolico")
 # )
 
 # Collect user input
-st.subheader(r"Scegli il quadrato in 2D dove visualizzare i livelli di $f$", )
-st.write("Scegli il centro del quadrato")
+st.write(r"Scegli il quadrato $Q$, di centro $(x_0,y_0)$ e lato $\ell$, dove visualizzare i livelli di $f$", )
+#st.write("Scegli il centro del quadrato")
 col1, col2 = st.columns(2)
 with col1:
     str_x0 = st.text_input(r"Scegli $x_0$ (default 0):", value=0.0)
@@ -164,7 +164,7 @@ with col2:
 center = st.checkbox(r"Mostra $(x_0,y_0)$", value=False)
 
 lato = st.number_input(
-    r"Scegli la lunghezza del lato del quadrato centrato in $(x_0, y_0)$ visualizzato (default 1):", 
+    r"Scegli $\ell$ (default 1):", 
     value=1.00, 
     step=0.01,
     format ="%f"
