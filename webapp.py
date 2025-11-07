@@ -156,20 +156,22 @@ st.subheader(r"Scegli il quadrato $Q$ centrato in $(x_0,y_0)$ e di lato $2\ell$"
 #st.write("Scegli il centro del quadrato")
 col1, col2 = st.columns(2)
 with col1:
-    str_x0 = st.text_input(r"Scegli $x_0$ (default 0):", value=0.0)
-    x0 = float(sp.sympify(str_x0))
+    x0 = float(st.text_input(r"Scegli $x_0$:", value="0.0"))
 with col2:
-    str_y0 = st.text_input(r"Scegli $y_0$ (default 0):", value=0.0)
-    y0 = float(sp.sympify(str_y0))
-    
+    y0 = float(st.text_input(r"Scegli $y_0$:", value="0.0"))
+
+# --- Checkbox per mostrare il punto ---
 center = st.checkbox(r"Mostra $(x_0,y_0)$", value=False)
 
-lato = st.number_input(
-    r"Scegli $\ell$ (default 1):", 
-    value=1.00, 
-    step=0.01,
-    format ="%f"
-)
+# --- Campo ℓ sulla stessa riga del testo ---
+col3, _ = st.columns([1, 4])  # col3 stretto per il testo, spazio vuoto accanto
+with col3:
+    lato = st.number_input(
+        r"Scegli $\ell$:", 
+        value=1.00, 
+        step=0.01, 
+        format="%f"
+    )
 
 
 st.subheader(r"Scegli la funzione $f$")
