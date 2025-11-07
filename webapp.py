@@ -160,18 +160,17 @@ with st.expander("📖 Mostra la guida per la sintassi Python"):
     st.markdown("""
     **Sintassi per scrivere funzioni matematiche in Python:**
     
-    - **Esponenziale**: `exp(x*y + x**2)` per \( e^{x\,y + x^2} \)
-    - **Trigonometriche**: `sin(x)`, `cos(x)`, `tan(x)`, `sin(x + y)`, etc.
+    - **Esponenziale**: `exp(x*y + x**2)` per  $e^{x\,y + x^2}$ 
+    - **Trigonometriche**: `sin(x)`, `cos(x)`, `tan(x)`, `sin(x + y)`, etc. per $\sin(x)$, $\cos(x)$, $\tan(x)$, $\sin(x+y)$, etc.
     - **Logaritmi**: `log(x)`, `log10(x)` per logaritmi naturali e base 10
-    - **Potenze**: `x**2` per \( x^2 \)
-    - **Radici quadrate**: `sqrt(x)` per \( \sqrt{x} \)
+    - **Potenze**: `x**2` per  $x^2$
+    - **Radici quadrate**: `sqrt(x)` per $\sqrt{x}$
     - **Funzioni più comuni**: `abs(x)`, `exp(x)`, `sqrt(x)`, `log(x)`
     
     **Esempi:**
-    - `exp(x*y + x**2)` per \( e^{x\,y + x^2} \)
-    - `sin(x + y)` per \( \sin(x + y) \)
-    - `log(x**2 + y**2)` per \( \log(x^2 + y^2) \)
-    - `x**2 + y**2 - 1` per \( x^2 + y^2 = 1 \)
+    - `exp(x*y + x**2)` per $e^{x\,y + x^2}$
+    - `sin(x + y)` per $\sin(x + y)$
+    - `log(x**2 + y**2)` per $\log(x^2 + y^2)$
     """)
 
 #st.subheader(r"Scegli il quadrato in 2D dove visualizzare i livelli di $f$", )
