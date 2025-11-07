@@ -151,9 +151,28 @@ st.title("Generatore di grafico dei livelli in 2D con input simbolico")
 # )
 
 # Collect user input
+st.subheader(r"Scegli il quadrato in 2D dove visualizzare i livelli di $f$", )
+st.write("Scegli il centro del quadrato")
+col1, col2 = st.columns(2)
+with col1:
+    str_x0 = st.text_input(r"Scegli $x_0$ (default 0):", value=0.0)
+    x0 = float(sp.sympify(str_x0))
+with col2:
+    str_y0 = st.text_input(r"Scegli $y_0$ (default 0):", value=0.0)
+    y0 = float(sp.sympify(str_y0))
+    
+center = st.checkbox(r"Mostra $(x_0,y_0)$", value=False)
 
-#st.subheader(r"Scegli la funzione $f$")
-func_str_f = st.text_input(r"Inserisci una funzione $f(x,y)$ secondo le operazioni in codice Python (e.g., scrivi exp(x*y+x**2) per la funzione $f(x,y) \, = \,e^{x\,y+x^2}$)", value="exp(x*y+x**2)")
+lato = st.number_input(
+    r"Scegli la lunghezza del lato del quadrato centrato in $(x_0, y_0)$ visualizzato (default 1):", 
+    value=1.00, 
+    step=0.01,
+    format ="%f"
+)
+
+
+st.subheader(r"Scegli la funzione $f$")
+func_str_f = st.text_input(r"Inserisci una funzione $f(x,y)$ secondo le operazioni in codice Python (Attenzione: $f(x,y)$ deve essere definita nel quadrato che stiamo considerando)", value="exp(x*y+x**2)")
 
 # Adding the help window for function input
 with st.expander("📖 Mostra la guida per la sintassi Python"):
@@ -171,27 +190,9 @@ with st.expander("📖 Mostra la guida per la sintassi Python"):
     **Esempi:**
     - `exp(x*y + x**2)` per $e^{x\,y + x^2}$
     - `sin(x + y)` per $\sin(x + y)$
-    - `log(x**2 + y**2)` per $\log(x^2 + y^2)$
+    - `log(x**2 + y**2 + 1)` per $\log(x^2 + y^2+1)$
     """)
 
-#st.subheader(r"Scegli il quadrato in 2D dove visualizzare i livelli di $f$", )
-#st.write("Scegli il centro del quadrato")
-col1, col2 = st.columns(2)
-with col1:
-    str_x0 = st.text_input(r"Scegli $x_0$ (default 0):", value=0.0)
-    x0 = float(sp.sympify(str_x0))
-with col2:
-    str_y0 = st.text_input(r"Scegli $y_0$ (default 0):", value=0.0)
-    y0 = float(sp.sympify(str_y0))
-    
-center = st.checkbox(r"Mostra $(x_0,y_0)$", value=False)
-
-lato = st.number_input(
-    r"Scegli la lunghezza del lato del quadrato centrato in $(x_0, y_0)$ visualizzato (default 1):", 
-    value=1.00, 
-    step=0.01,
-    format ="%f"
-)
 
 # Colormap selection
 colormap = st.selectbox(r"Scegli un colorset per i livelli di $f$:", ['viridis', 'Greys', 'autumn', 'coolwarm'])
