@@ -154,24 +154,39 @@ st.title("Esplora le curve di livello")
 st.markdown(r"$\bullet$ Scegli il quadrato $Q$ centrato in $(x_0,y_0)$ e di lato $2\ell$")
 #st.write(r"Scegli il quadrato $Q$, di centro $(x_0,y_0)$ e lato $\ell$, dove visualizzare i livelli di $f$", )
 #st.write("Scegli il centro del quadrato")
-col1, col2, col3, col4 = st.columns([1, 2, 1, 2])
+
+# --- Imposta uno stile CSS più compatto e centrato ---
+st.markdown("""
+<style>
+.inline-label {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.4rem;
+    font-size: 0.95rem;
+}
+.block-container {
+    padding-top: 1rem;
+}
+</style>
+""", unsafe_allow_html=True)
+
+
+# --- Riga unica per x0, y0, ell ---
+col1, col2, col3 = st.columns([1, 1, 1])
 
 with col1:
-    st.write(r"Scegli $x_0$:")
-with col2:
+    st.markdown('<div class="inline-label">Scegli $x_0$:</div>', unsafe_allow_html=True)
     x0 = float(st.text_input("", value="0.0", key="x0"))
 
-with col3:
-    st.write(r"Scegli $y_0$:")
-with col4:
+with col2:
+    st.markdown('<div class="inline-label">Scegli $y_0$:</div>', unsafe_allow_html=True)
     y0 = float(st.text_input("", value="0.0", key="y0"))
 
-# ---- ℓ (lato) sulla stessa riga del testo ----
-col5, col6 = st.columns([1, 3])
-with col5:
-    st.write(r"Scegli $\ell$:")
-with col6:
-    lato = st.number_input("", value=1.00, step=0.01, format="%f")
+with col3:
+    st.markdown('<div class="inline-label">Scegli $\\ell$:</div>', unsafe_allow_html=True)
+    lato = st.number_input("", value=1.00, step=0.01, format="%f", label_visibility="collapsed")
+
        
 
 st.markdown(r"$\bullet$ Scegli la funzione $f$")
