@@ -162,17 +162,25 @@ st.markdown(
 col1, col2, col3 = st.columns([1, 1, 1])
 
 with col1:
-    st.latex(r"x_0")
-    x0 = float(st.text_input("", value="0.0", key="x0", label_visibility="collapsed"))
+    str_x0 = st.text_input(r"Scegli $x_0$ (default 0):", value=0.0)
+    x0 = float(sp.sympify(str_x0))
 
 with col2:
-    st.latex(r"y_0")
-    y0 = float(st.text_input("", value="0.0", key="y0", label_visibility="collapsed"))
+    str_y0 = st.text_input(r"Scegli $y_0$ (default 0):", value=0.0)
+    y0 = float(sp.sympify(str_y0))
 
 with col3:
-    st.latex(r"\ell")
-    lato = st.number_input("", value=1.00, step=0.01, format="%f", label_visibility="collapsed")
+    lato = st.number_input(
+    r"Scegli la lunghezza del lato del quadrato centrato in $(x_0, y_0)$ visualizzato (default 1):",
+    value=1.00,
+    step=0.01,
+    format="%f"
+)
 
+# --- Checkbox per mostrare il punto centrale ---
+center = st.checkbox(r"Mostra $(x_0, y_0)$", value=False)
+
+# --- Input per la lunghezza del lato ---
 
 
        
