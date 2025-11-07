@@ -155,7 +155,24 @@ st.title("Generatore di grafico dei livelli in 2D con input simbolico")
 #st.subheader(r"Scegli la funzione $f$")
 func_str_f = st.text_input(r"Inserisci una funzione $f(x,y)$ secondo le operazioni in codice Python (e.g., scrivi exp(x*y+x**2) per la funzione $f(x,y) \, = \,e^{x\,y+x^2}$)", value="exp(x*y+x**2)")
 
-
+# Adding the help window for function input
+with st.expander("📖 Mostra la guida per la sintassi Python"):
+    st.markdown("""
+    **Sintassi per scrivere funzioni matematiche in Python:**
+    
+    - **Esponenziale**: `exp(x*y + x**2)` per \( e^{x\,y + x^2} \)
+    - **Trigonometriche**: `sin(x)`, `cos(x)`, `tan(x)`, `sin(x + y)`, etc.
+    - **Logaritmi**: `log(x)`, `log10(x)` per logaritmi naturali e base 10
+    - **Potenze**: `x**2` per \( x^2 \)
+    - **Radici quadrate**: `sqrt(x)` per \( \sqrt{x} \)
+    - **Funzioni più comuni**: `abs(x)`, `exp(x)`, `sqrt(x)`, `log(x)`
+    
+    **Esempi:**
+    - `exp(x*y + x**2)` per \( e^{x\,y + x^2} \)
+    - `sin(x + y)` per \( \sin(x + y) \)
+    - `log(x**2 + y**2)` per \( \log(x^2 + y^2) \)
+    - `x**2 + y**2 - 1` per \( x^2 + y^2 = 1 \)
+    """)
 
 #st.subheader(r"Scegli il quadrato in 2D dove visualizzare i livelli di $f$", )
 #st.write("Scegli il centro del quadrato")
