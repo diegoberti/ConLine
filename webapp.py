@@ -171,7 +171,7 @@ with col2:
 
 with col3:
     lato = st.number_input(
-    r"Scegli la lunghezza del lato del quadrato centrato in $(x_0, y_0)$ visualizzato (default 1):",
+    r"Scegli $\ell$ (default 1):",
     value=1.00,
     step=0.01,
     format="%f"
