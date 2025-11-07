@@ -159,16 +159,17 @@ st.markdown(r"$\bullet$ Scegli il quadrato $Q$ centrato in $(x_0,y_0)$ e di lato
 col1, col2, col3 = st.columns([1, 1, 1])
 
 with col1:
-    st.text("Scegli $x_0$:", unsafe_allow_html=True)
-    x0 = float(st.text_input("", value="0.0", key="x0"))
+    st.latex(r"x_0")
+    x0 = float(st.text_input("", value="0.0", key="x0", label_visibility="collapsed"))
 
 with col2:
-    st.text("Scegli $y_0$:", unsafe_allow_html=True)
-    y0 = float(st.text_input("", value="0.0", key="y0"))
+    st.latex(r"y_0")
+    y0 = float(st.text_input("", value="0.0", key="y0", label_visibility="collapsed"))
 
 with col3:
-    st.text("Scegli $\\ell$:", unsafe_allow_html=True)
+    st.latex(r"\ell")
     lato = st.number_input("", value=1.00, step=0.01, format="%f", label_visibility="collapsed")
+
 
 
        
