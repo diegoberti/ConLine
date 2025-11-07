@@ -139,7 +139,7 @@ def alg(f, x0=0, y0=0, d=1, e=0.01, cl=True, center=True, col='viridis', level=0
     return fig1, fig2, fig3
 
 # Streamlit interface
-#st.title("Linee di livello")
+st.title("App per curve di livello")
 
 # temp =st.number_input(
 #     label="test",
