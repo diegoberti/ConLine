@@ -155,23 +155,6 @@ st.markdown(r"$\bullet$ Scegli il quadrato $Q$ centrato in $(x_0,y_0)$ e di lato
 #st.write(r"Scegli il quadrato $Q$, di centro $(x_0,y_0)$ e lato $\ell$, dove visualizzare i livelli di $f$", )
 #st.write("Scegli il centro del quadrato")
 
-# --- Imposta uno stile CSS più compatto e centrato ---
-st.markdown("""
-<style>
-.inline-label {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 0.4rem;
-    font-size: 0.95rem;
-}
-.block-container {
-    padding-top: 1rem;
-}
-</style>
-""", unsafe_allow_html=True)
-
-
 # --- Riga unica per x0, y0, ell ---
 col1, col2, col3 = st.columns([1, 1, 1])
 
