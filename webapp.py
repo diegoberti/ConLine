@@ -159,13 +159,14 @@ func_str_f = st.text_input(r"Inserisci una funzione $f(x,y)$ secondo le operazio
 with st.expander("📖 Mostra la guida per la sintassi Python"):
     st.markdown("""
     **Sintassi per scrivere funzioni matematiche in Python:**
-    
-    - **Esponenziale**: `exp(x*y + x**2)` per  $e^{x\,y + x^2}$ 
+
+    - **Potenze**: `x**2` per $x^2$, `x**3` per $x^3$, `x^{1/3}` per $x^{1/3}$, etc...
+    - **Moltiplicazioni**: `3*x` per $3\,x$, `x*y` per $x\,y$, etc...
+    - **Esponenziale**: `exp(x)` per  $e^{x}$ 
     - **Trigonometriche**: `sin(x)`, `cos(x)`, `tan(x)`, `sin(x + y)`, etc. per $\sin(x)$, $\cos(x)$, $\tan(x)$, $\sin(x+y)$, etc.
     - **Logaritmi**: `log(x)`, `log10(x)` per logaritmi naturali e base 10
-    - **Potenze**: `x**2` per  $x^2$
     - **Radici quadrate**: `sqrt(x)` per $\sqrt{x}$
-    - **Funzioni più comuni**: `abs(x)`, `exp(x)`, `sqrt(x)`, `log(x)`
+    - **Altre funzioni comuni**: `abs(x)` per $|x|$, `sqrt(x)` per $\sqrt{x}$
     
     **Esempi:**
     - `exp(x*y + x**2)` per $e^{x\,y + x^2}$
