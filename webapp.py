@@ -139,7 +139,7 @@ def alg(f, x0=0, y0=0, d=1, e=0.01, cl=True, center=True, col='viridis', level=0
     return fig1, fig2, fig3
 
 # Streamlit interface
-st.title("Generatore di grafico dei livelli in 2D con input simbolico")
+st.title("Generatore di grafico dei livelli in 2D")
 
 # temp =st.number_input(
 #     label="test",
