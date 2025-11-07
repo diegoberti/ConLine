@@ -176,8 +176,10 @@ with col3:
 
 
        
-
-st.markdown(r"$\bullet$ Scegli la funzione $f$")
+st.markdown(
+    r"<span style='color:#1f4e79'>$\bullet$ Scegli la funzione $f$</span>",
+    unsafe_allow_html=True
+)
 func_str_f = st.text_input(r"Inserisci una funzione $f(x,y)$ secondo le operazioni in codice Python (Attenzione: $f(x,y)$ deve essere definita Q!)", value="exp(x*y+x**2)")
 
 # Adding the help window for function input
