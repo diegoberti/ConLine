@@ -139,13 +139,7 @@ with col2:
     str_y0 = st.text_input(r"Scegli $y_0$ (default 0):", value="0")
 
 with col3:
-    lato = st.number_input(
-        r"Scegli $\ell$ (default 1):",
-        value=1.00,
-        min_value=0.01,
-        step=0.01,
-        format="%f"
-    )
+    lato_str = st.text_input(r"Scegli $\ell$ (default 1):", value="1")
 
 center = st.checkbox(r"Mostra $(x_0, y_0)$", value=False)
 
@@ -216,6 +210,7 @@ if st.button("Genera i grafici"):
         # Parse and validate inputs
         x0 = float(sp.sympify(str_x0))
         y0 = float(sp.sympify(str_y0))
+        lato = float(sp.sympify(lato_str))
         passo = float(sp.sympify(passo_str))
         
         if passo <= 0:
@@ -261,18 +256,18 @@ if st.button("Genera i grafici"):
                                                 center=center, level=livello_f,
                                                 show_level=curva_livello_f)
             
-            st.subheader("Mappa dei valori di $f$")
+            st.subheader("Mappa di calore")
             st.pyplot(fig1)
             buf1 = fig_to_bytes(fig1)
             st.download_button(
-                label="📥 Scarica la mappa (PNG)",
+                label="📥 Scarica mappa di calore (PNG)",
                 data=buf1,
                 file_name=f"heatmap_{x0}_{y0}.png",
                 mime="image/png",
                 key="download1"
             )
             
-            st.subheader("Curve di livello di $f$")
+            st.subheader("Curve di livello")
             st.pyplot(fig2)
             buf2 = fig_to_bytes(fig2)
             st.download_button(
