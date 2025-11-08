@@ -256,18 +256,18 @@ if st.button("Genera i grafici"):
                                                 center=center, level=livello_f,
                                                 show_level=curva_livello_f)
             
-            st.subheader("Mappa di calore")
+            st.subheader("Mappa dei valori di $f$")
             st.pyplot(fig1)
             buf1 = fig_to_bytes(fig1)
             st.download_button(
-                label="📥 Scarica mappa di calore (PNG)",
+                label="📥 Scarica mappa (PNG)",
                 data=buf1,
                 file_name=f"heatmap_{x0}_{y0}.png",
                 mime="image/png",
                 key="download1"
             )
             
-            st.subheader("Curve di livello")
+            st.subheader("Curve di livello di $f$")
             st.pyplot(fig2)
             buf2 = fig_to_bytes(fig2)
             st.download_button(
