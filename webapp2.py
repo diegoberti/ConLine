@@ -154,29 +154,34 @@ st.markdown(
     r"<span style='color:#1f4e79'>$\bullet$ Scegli la funzione $f$</span>",
     unsafe_allow_html=True
 )
-func_str_f = st.text_input(
-    r"Inserisci una funzione $f(x,y)$ secondo le operazioni in codice Python",
-    value="exp(x*y+x**2)"
-)
 
-# Help expander
-with st.expander("📖 Mostra la guida per la sintassi Python"):
-    st.markdown("""
-    **Sintassi per scrivere funzioni matematiche in Python:**
+col_func, col_help = st.columns([1, 1])
 
-    - **Potenze**: `x**2` per $x^2$, `x**3` per $x^3$, `x**(1/3)` per $x^{1/3}$
-    - **Moltiplicazioni**: `3*x` per $3x$, `x*y` per $xy$
-    - **Esponenziale**: `exp(x)` per $e^{x}$ 
-    - **Trigonometriche**: `sin(x)`, `cos(x)`, `tan(x)`, `sin(x + y)`
-    - **Logaritmi**: `log(x)`, `log10(x)` per logaritmi naturali e base 10
-    - **Radici quadrate**: `sqrt(x)` per $\sqrt{x}$
-    - **Altre funzioni comuni**: `abs(x)` per $|x|$
-    
-    **Esempi:**
-    - `exp(x*y + x**2)` per $e^{xy + x^2}$
-    - `sin(x + y)` per $\sin(x + y)$
-    - `log(x**2 + y**2 + 1)` per $\log(x^2 + y^2+1)$
-    """)
+with col_func:
+    func_str_f = st.text_input(
+        r"Inserisci una funzione $f(x,y)$ secondo le operazioni in codice Python",
+        value="exp(x*y+x**2)"
+    )
+
+with col_help:
+    # Help expander
+    with st.expander("📖 Mostra la guida per la sintassi Python"):
+        st.markdown("""
+        **Sintassi per scrivere funzioni matematiche in Python:**
+
+        - **Potenze**: `x**2` per $x^2$, `x**3` per $x^3$, `x**(1/3)` per $x^{1/3}$
+        - **Moltiplicazioni**: `3*x` per $3x$, `x*y` per $xy$
+        - **Esponenziale**: `exp(x)` per $e^{x}$ 
+        - **Trigonometriche**: `sin(x)`, `cos(x)`, `tan(x)`, `sin(x + y)`
+        - **Logaritmi**: `log(x)`, `log10(x)` per logaritmi naturali e base 10
+        - **Radici quadrate**: `sqrt(x)` per $\sqrt{x}$
+        - **Altre funzioni comuni**: `abs(x)` per $|x|$
+        
+        **Esempi:**
+        - `exp(x*y + x**2)` per $e^{xy + x^2}$
+        - `sin(x + y)` per $\sin(x + y)$
+        - `log(x**2 + y**2 + 1)` per $\log(x^2 + y^2+1)$
+        """)
 
 # Colormap selection
 colormap = st.selectbox(
