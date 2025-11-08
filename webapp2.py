@@ -256,27 +256,32 @@ if st.button("Genera i grafici"):
                                                 center=center, level=livello_f,
                                                 show_level=curva_livello_f)
             
-            st.subheader("Mappa dei valori di $f$ in $Q$")
-            st.pyplot(fig1)
-            buf1 = fig_to_bytes(fig1)
-            st.download_button(
-                label="📥 Scarica mappa (PNG)",
-                data=buf1,
-                file_name=f"heatmap_{x0}_{y0}.png",
-                mime="image/png",
-                key="download1"
-            )
+            # Display figures side by side
+            col_fig1, col_fig2 = st.columns(2)
             
-            st.subheader("Curve di livello di $f$ in $Q$")
-            st.pyplot(fig2)
-            buf2 = fig_to_bytes(fig2)
-            st.download_button(
-                label="📥 Scarica curve di livello (PNG)",
-                data=buf2,
-                file_name=f"contours_{x0}_{y0}.png",
-                mime="image/png",
-                key="download2"
-            )
+            with col_fig1:
+                st.subheader("Mappa di calore")
+                st.pyplot(fig1)
+                buf1 = fig_to_bytes(fig1)
+                st.download_button(
+                    label="📥 Scarica mappa di calore (PNG)",
+                    data=buf1,
+                    file_name=f"heatmap_{x0}_{y0}.png",
+                    mime="image/png",
+                    key="download1"
+                )
+            
+            with col_fig2:
+                st.subheader("Curve di livello")
+                st.pyplot(fig2)
+                buf2 = fig_to_bytes(fig2)
+                st.download_button(
+                    label="📥 Scarica curve di livello (PNG)",
+                    data=buf2,
+                    file_name=f"contours_{x0}_{y0}.png",
+                    mime="image/png",
+                    key="download2"
+                )
         
     except ValueError as ve:
         st.error(f"❌ Errore di validazione: {ve}")
