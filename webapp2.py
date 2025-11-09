@@ -156,7 +156,7 @@ col_func, col_help = st.columns([1, 1])
 
 with col_func:
     func_str_f = st.text_input(
-        r"Inserisci una funzione $f(x,y)$ secondo le operazioni in codice Python",
+        r"Inserisci $f(x,y)$ secondo la sintassi Python",
         value="exp(x*y+x**2)"
     )
 
