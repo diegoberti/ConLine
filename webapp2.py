@@ -182,6 +182,11 @@ with col_help:
         - `log(x**2 + y**2 + 1)` per $\log(x^2 + y^2+1)$
         """)
 
+st.markdown(
+    r"<span style='color:#1f4e79'>$\bullet$ Genera i grafici</span>",
+    unsafe_allow_html=True
+)
+
 col1, col2 = st.columns([1, 1])
 
 with col1:
