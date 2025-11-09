@@ -230,6 +230,9 @@ if st.button("Genera i grafici"):
             st.warning(f"⚠️ La funzione non è definita o è infinita in ({x0}, {y0})")
             st.stop()
         
+        # Show function value at center
+        st.info(f"✓ $f({x0}, {y0}) = {f0_val:.6f}$")
+        
         # Parse level if specified
         livello_f = 0
         if curva_livello_f and liv_f_str:
