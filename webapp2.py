@@ -261,7 +261,7 @@ if st.button("Genera i grafici"):
         # Generate plots
         if vincolo:
             g = symbolic_to_callable(func_str_g)
-            fig = plot_with_constraint(f, g, x0, y0, lato, colormap=viridis, 
+            fig = plot_with_constraint(f, g, x0, y0, lato, colormap, 
                                       center=center, level=livello_f, 
                                       show_level=curva_livello_f)
             st.pyplot(fig)
