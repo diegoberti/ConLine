@@ -178,10 +178,10 @@ with col_help:
         """)
 
 # Colormap selection
-colormap = st.selectbox(
-    r"Scegli un colorset per i livelli di $f$:", 
-    ['viridis', 'Greys', 'autumn', 'coolwarm']
-)
+#colormap = st.selectbox(
+ #   r"Scegli un colorset per i livelli di $f$:", 
+  #  ['viridis', 'Greys', 'autumn', 'coolwarm']
+#)
 
 # Step size input
 passo_str = st.text_input(
@@ -246,7 +246,7 @@ if st.button("Genera i grafici"):
         # Generate plots
         if vincolo:
             g = symbolic_to_callable(func_str_g)
-            fig = plot_with_constraint(f, g, x0, y0, lato, colormap, 
+            fig = plot_with_constraint(f, g, x0, y0, lato, colormap=viridis, 
                                       center=center, level=livello_f, 
                                       show_level=curva_livello_f)
             st.pyplot(fig)
