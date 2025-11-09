@@ -162,6 +162,8 @@ with col_func:
 
 with col_help:
     # Help expander
+    st.write("")
+    st.write("")
     with st.expander("📖 Mostra la guida per la sintassi Python"):
         st.markdown("""
         **Sintassi per scrivere funzioni matematiche in Python:**
