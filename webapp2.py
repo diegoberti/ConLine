@@ -186,6 +186,7 @@ with col1:
     )
 
 with col2:
+    st.write("")
     colormap = st.selectbox(
         r"Scegli un colorset per i livelli di $f$:", 
         ['viridis', 'Greys', 'autumn', 'coolwarm']
