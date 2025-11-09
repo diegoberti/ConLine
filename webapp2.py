@@ -177,7 +177,7 @@ with col_help:
         - `log(x**2 + y**2 + 1)` per $\log(x^2 + y^2+1)$
         """)
 
-col1, col2, col3 = st.columns([1, 1, 1])
+col1, col2 = st.columns([1, 1])
 
 with col1:
     passo_str = st.text_input(
