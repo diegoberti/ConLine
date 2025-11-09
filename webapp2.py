@@ -130,7 +130,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-col1, col2, col3 = st.columns([1, 1, 1])
+col1, col2, col3, col4 = st.columns([1, 1, 1, 1])
 
 with col1:
     str_x0 = st.text_input(r"Scegli $x_0$:", value="0")
@@ -139,9 +139,12 @@ with col2:
     str_y0 = st.text_input(r"Scegli $y_0$:", value="0")
 
 with col3:
+    center = st.checkbox(r"Mostra $(x_0, y_0)$", value=False)
+
+with col4:
     lato_str = st.text_input(r"Scegli $\ell$:", value="1")
 
-center = st.checkbox(r"Mostra $(x_0, y_0)$", value=False)
+
 
 # Function input
 st.markdown(
