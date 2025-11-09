@@ -117,9 +117,8 @@ def fig_to_bytes(fig):
 st.title("Esplora le curve di livello")
 
 # Domain selection
-st.subheader(r"style='color:#1f4e79'>$\bullet$ Scegli il quadrato $Q$ centrato in $(x_0, y_0)$ e di lato $2\ell$")
 st.markdown(
-    r"<span style='color:#1f4e79'>$\bullet$ Scegli il quadrato $Q$ centrato in $(x_0, y_0)$ e di lato $2\ell$</span>",
+    r"<h3 style='color:#1f4e79'>Scegli il quadrato $Q$ centrato in $(x_0, y_0)$ e di lato $2\ell$</h3>",
     unsafe_allow_html=True
 )
 
