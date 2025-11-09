@@ -117,7 +117,7 @@ def fig_to_bytes(fig):
 st.title("Esplora le curve di livello")
 
 # Domain selection
-st.subheader("$\bullet$ Scegli il quadrato $Q$ centrato in $(x_0, y_0)$ e di lato $2\ell$")
+st.subheader(r"$\bullet$ Scegli il quadrato $Q$ centrato in $(x_0, y_0)$ e di lato $2\ell$")
 
 col1, col2, col3, col4 = st.columns([1, 1, 1, 1])
 
@@ -134,10 +134,7 @@ with col4:
     lato_str = st.text_input(r"Scegli $\ell$:", value="1")
 
 # Function input
-st.markdown(
-    r"<span style='color:#1f4e79'>$\bullet$ Scegli la funzione $f$</span>",
-    unsafe_allow_html=True
-)
+st.subheader(r"$\bullet$ Scegli la funzione $f$")
 
 col_func, col_help = st.columns([1, 1])
 
@@ -170,10 +167,7 @@ with col_help:
         """)
 
 # Section 1: Generate heatmap
-st.markdown(
-    r"<span style='color:#1f4e79'>$\bullet$ Genera la mappa dei valori di $f$ in $Q$</span>",
-    unsafe_allow_html=True
-)
+st.subheader(r"$\bullet$ Genera la mappa dei valori di $f$ in $Q$")
 
 colormap_heat = st.selectbox(
     r"Scegli un colorset:", 
@@ -256,10 +250,7 @@ if st.button("Genera mappa di calore"):
         st.error(f"❌ Errore: {ex.__class__.__name__} - {ex}")
 
 # Section 2: Generate contour plot
-st.markdown(
-    r"<span style='color:#1f4e79'>$\bullet$ Genera curve di livello attorno a $f(x_0,y_0)$</span>",
-    unsafe_allow_html=True
-)
+st.subheader(r"$\bullet$ Genera curve di livello attorno a $f(x_0,y_0)$")
 
 passo_str = st.text_input(
     label=r"Scegli la differenza tra i valori dei livelli partendo da $f_0=f(x_0,y_0)$:",
