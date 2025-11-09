@@ -215,7 +215,7 @@ with col2:
 #)
 
 # Constraint option
-vincolo = st.checkbox("Aggiungi il vincolo 👇", value=False)
+vincolo = st.checkbox("Aggiungi il vincolo (visualizzato in bianco sulla mappa dei valori di $f$) 👇", value=False)
 func_str_g = None
 if vincolo:
     func_str_g = st.text_input(
@@ -224,7 +224,7 @@ if vincolo:
     )
 
 # Level curve option
-curva_livello_f = st.checkbox(r"Visualizza una curva di livello specifica di $f$ 👇", value=False)
+curva_livello_f = st.checkbox(r"Visualizza una curva di livello specifica di $f$ (in colore verde lime nei grafici) 👇", value=False)
 liv_f_str = None
 if curva_livello_f:
     liv_f_str = st.text_input("Scegli il livello:", value="0")
