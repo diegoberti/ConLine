@@ -191,7 +191,7 @@ col1, col2 = st.columns([1, 1])
 
 with col1:
     passo_str = st.text_input(
-        label=r"Scegli la differenza tra i valori dei livelli partendo da $f_0=f(x_0,y_0):",
+        label=r"Scegli la differenza tra i valori dei livelli partendo da $f_0=f(x_0,y_0)$:",
         value ="0.01"
     )
 
