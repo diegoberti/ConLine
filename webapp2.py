@@ -230,8 +230,13 @@ if st.button("Genera i grafici"):
             st.warning(f"⚠️ La funzione non è definita o è infinita in ({x0}, {y0})")
             st.stop()
         
-        # Show function value at center
-        st.info(f"✓ $f({x0}, {y0}) = {f0_val:.6f}$")
+        # Show function value at center with minimal decimal places
+        if f0_val == int(f0_val):
+            f0_display = f"{int(f0_val)}"
+        else:
+            f0_display = f"{f0_val:.6g}"
+        
+        st.info(f"✓ $f(x_0, y_0) = {f0_display}$")
         
         # Parse level if specified
         livello_f = 0
