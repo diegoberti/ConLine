@@ -236,7 +236,7 @@ if st.button("Genera i grafici"):
         else:
             f0_display = f"{f0_val:.6g}"
         
-        st.info(f"✓ $f(x_0, y_0) = {f0_display}$")
+        st.info(f"$f(x_0, y_0) = {f0_display}$")
         
         # Parse level if specified
         livello_f = 0
@@ -268,11 +268,11 @@ if st.button("Genera i grafici"):
             col_fig1, col_fig2 = st.columns(2)
             
             with col_fig1:
-                st.subheader("Mappa di calore")
+                st.subheader("Mappa dei valori di $f$ in $Q$")
                 st.pyplot(fig1)
                 buf1 = fig_to_bytes(fig1)
                 st.download_button(
-                    label="📥 Scarica mappa di calore (PNG)",
+                    label="📥 Scarica mappa (PNG)",
                     data=buf1,
                     file_name=f"heatmap_{x0}_{y0}.png",
                     mime="image/png",
@@ -280,7 +280,7 @@ if st.button("Genera i grafici"):
                 )
             
             with col_fig2:
-                st.subheader("Curve di livello")
+                st.subheader("Curve di livello di $f$ in $Q$")
                 st.pyplot(fig2)
                 buf2 = fig_to_bytes(fig2)
                 st.download_button(
