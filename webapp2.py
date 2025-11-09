@@ -133,13 +133,13 @@ st.markdown(
 col1, col2, col3 = st.columns([1, 1, 1])
 
 with col1:
-    str_x0 = st.text_input(r"Scegli $x_0$ (default 0):", value="0")
+    str_x0 = st.text_input(r"Scegli $x_0$:", value="0")
 
 with col2:
-    str_y0 = st.text_input(r"Scegli $y_0$ (default 0):", value="0")
+    str_y0 = st.text_input(r"Scegli $y_0$:", value="0")
 
 with col3:
-    lato_str = st.text_input(r"Scegli $\ell$ (default 1):", value="1")
+    lato_str = st.text_input(r"Scegli $\ell$:", value="1")
 
 center = st.checkbox(r"Mostra $(x_0, y_0)$", value=False)
 
@@ -177,6 +177,20 @@ with col_help:
         - `log(x**2 + y**2 + 1)` per $\log(x^2 + y^2+1)$
         """)
 
+col1, col2, col3 = st.columns([1, 1, 1])
+
+with col1:
+    passo_str = st.text_input(
+        label=r"Scegli la differenza tra i valori dei livelli partendo da $f_0=f(x_0,y_0):",
+        value ="0.01"
+    )
+
+with col2:
+    colormap = st.selectbox(
+        r"Scegli un colorset per i livelli di $f$:", 
+        ['viridis', 'Greys', 'autumn', 'coolwarm']
+    )
+
 # Colormap selection
 #colormap = st.selectbox(
  #   r"Scegli un colorset per i livelli di $f$:", 
@@ -184,10 +198,10 @@ with col_help:
 #)
 
 # Step size input
-passo_str = st.text_input(
-    label=r"Scegli il passo con cui visualizzare le curve di livello attorno a $f_0=f(x_0,y_0)$ (default 0.01):",
-    value="0.01"
-)
+#passo_str = st.text_input(
+ #   label=r"Scegli il passo con cui visualizzare le curve di livello attorno a $f_0=f(x_0,y_0)$ (default 0.01):",
+  #  value="0.01"
+#)
 
 # Constraint option
 vincolo = st.checkbox("Aggiungi il vincolo 👇", value=False)
