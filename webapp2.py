@@ -166,7 +166,82 @@ with col_help:
         - `log(x**2 + y**2 + 1)` per $\log(x^2 + y^2+1)$
         """)
 
-# Section 1: Generate heatmap
+# Section 1: Generate contour plot
+st.subheader(r"$\bullet$ Genera curve di livello attorno a $f(x_0,y_0)$")
+
+passo_str = st.text_input(
+    label=r"Scegli la differenza tra i valori dei livelli partendo da $f_0=f(x_0,y_0)$:",
+    value="0.01",
+    key="passo_contour"
+)
+
+curva_livello_contour = st.checkbox(r"Visualizza una curva di livello specifica", value=False, key="level_contour")
+liv_contour_str = None
+if curva_livello_contour:
+    liv_contour_str = st.text_input("Scegli il livello:", value="0", key="level_value_contour")
+
+if st.button("Genera curve di livello"):
+    try:
+        # Parse and validate inputs
+        x0 = float(sp.sympify(str_x0))
+        y0 = float(sp.sympify(str_y0))
+        lato = float(sp.sympify(lato_str))
+        passo = float(sp.sympify(passo_str))
+        
+        if passo <= 0:
+            st.error("Il passo deve essere positivo")
+            st.stop()
+        
+        if lato <= 0:
+            st.error("Il lato deve essere positivo")
+            st.stop()
+        
+        # Convert function
+        f = symbolic_to_callable(func_str_f)
+        
+        # Test function at center
+        f0_val = f(x0, y0)
+        if not np.isfinite(f0_val):
+            st.warning(f"⚠️ La funzione non è definita o è infinita in ({x0}, {y0})")
+            st.stop()
+        
+        # Show function value at center with minimal decimal places
+        if f0_val == int(f0_val):
+            f0_display = f"{int(f0_val)}"
+        else:
+            f0_display = f"{f0_val:.6g}"
+        
+        st.info(f"$f(x_0, y_0) = {f0_display}$")
+        
+        # Parse level if specified
+        livello_contour = 0
+        if curva_livello_contour and liv_contour_str:
+            livello_contour = float(sp.sympify(liv_contour_str))
+        
+        # Generate contour plot
+        fig = generate_contour(f, x0, y0, lato, passo, 
+                              center=center, level=livello_contour,
+                              show_level=curva_livello_contour)
+        
+        st.subheader("Curve di livello di $f$ in $Q$")
+        st.pyplot(fig)
+        
+        buf = fig_to_bytes(fig)
+        st.download_button(
+            label="📥 Scarica curve di livello (PNG)",
+            data=buf,
+            file_name=f"contours_{x0}_{y0}.png",
+            mime="image/png",
+            key="download_contour"
+        )
+        
+    except ValueError as ve:
+        st.error(f"❌ Errore di validazione: {ve}")
+    except Exception as ex:
+        st.error(f"❌ Errore: {ex.__class__.__name__} - {ex}")
+
+
+# Section 2: Generate heatmap
 st.subheader(r"$\bullet$ Genera la mappa dei valori di $f$ in $Q$")
 
 colormap_heat = st.selectbox(
@@ -249,76 +324,3 @@ if st.button("Genera mappa di calore"):
     except Exception as ex:
         st.error(f"❌ Errore: {ex.__class__.__name__} - {ex}")
 
-# Section 2: Generate contour plot
-st.subheader(r"$\bullet$ Genera curve di livello attorno a $f(x_0,y_0)$")
-
-passo_str = st.text_input(
-    label=r"Scegli la differenza tra i valori dei livelli partendo da $f_0=f(x_0,y_0)$:",
-    value="0.01",
-    key="passo_contour"
-)
-
-curva_livello_contour = st.checkbox(r"Visualizza una curva di livello specifica", value=False, key="level_contour")
-liv_contour_str = None
-if curva_livello_contour:
-    liv_contour_str = st.text_input("Scegli il livello:", value="0", key="level_value_contour")
-
-if st.button("Genera curve di livello"):
-    try:
-        # Parse and validate inputs
-        x0 = float(sp.sympify(str_x0))
-        y0 = float(sp.sympify(str_y0))
-        lato = float(sp.sympify(lato_str))
-        passo = float(sp.sympify(passo_str))
-        
-        if passo <= 0:
-            st.error("Il passo deve essere positivo")
-            st.stop()
-        
-        if lato <= 0:
-            st.error("Il lato deve essere positivo")
-            st.stop()
-        
-        # Convert function
-        f = symbolic_to_callable(func_str_f)
-        
-        # Test function at center
-        f0_val = f(x0, y0)
-        if not np.isfinite(f0_val):
-            st.warning(f"⚠️ La funzione non è definita o è infinita in ({x0}, {y0})")
-            st.stop()
-        
-        # Show function value at center with minimal decimal places
-        if f0_val == int(f0_val):
-            f0_display = f"{int(f0_val)}"
-        else:
-            f0_display = f"{f0_val:.6g}"
-        
-        st.info(f"$f(x_0, y_0) = {f0_display}$")
-        
-        # Parse level if specified
-        livello_contour = 0
-        if curva_livello_contour and liv_contour_str:
-            livello_contour = float(sp.sympify(liv_contour_str))
-        
-        # Generate contour plot
-        fig = generate_contour(f, x0, y0, lato, passo, 
-                              center=center, level=livello_contour,
-                              show_level=curva_livello_contour)
-        
-        st.subheader("Curve di livello di $f$ in $Q$")
-        st.pyplot(fig)
-        
-        buf = fig_to_bytes(fig)
-        st.download_button(
-            label="📥 Scarica curve di livello (PNG)",
-            data=buf,
-            file_name=f"contours_{x0}_{y0}.png",
-            mime="image/png",
-            key="download_contour"
-        )
-        
-    except ValueError as ve:
-        st.error(f"❌ Errore di validazione: {ve}")
-    except Exception as ex:
-        st.error(f"❌ Errore: {ex.__class__.__name__} - {ex}")
