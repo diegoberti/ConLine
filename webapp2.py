@@ -72,15 +72,16 @@ def generate_heatmap(f, g, x0, y0, d, colormap, center=True, level=0, show_level
     fig, ax = create_base_plot(X, Y, Z, colormap)
     
     # Add constraint contour if requested
+    # Add constraint contour if requested
     if with_constraint and g is not None:
         Z2 = g(X, Y)
-        ax.contour(X, Y, Z2, [0], linewidths=1.5, alpha=0.5, colors='white')
+        ax.contour(X, Y, Z2, [0], linewidths=2, alpha=1, colors='white')
     
     if center:
         ax.plot(x0, y0, marker='x', color='black', markersize=10, markeredgewidth=2)
     
     if show_level:
-        ax.contour(X, Y, Z, [level], linewidths=3, colors='lime')
+        ax.contour(X, Y, Z, [level], linewidths=2, colors='lime')
     
     return fig
 
