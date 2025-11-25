@@ -75,13 +75,13 @@ def generate_heatmap(f, g, x0, y0, d, colormap, center=True, level=0, show_level
     # Add constraint contour if requested
     if with_constraint and g is not None:
         Z2 = g(X, Y)
-        ax.contour(X, Y, Z2, [0], linewidths=1.5, alpha=1, colors='white')
+        ax.contour(X, Y, Z2, [0], linewidths=1, alpha=1, colors='white')
     
     if center:
         ax.plot(x0, y0, marker='x', color='black', markersize=10, markeredgewidth=2)
     
     if show_level:
-        ax.contour(X, Y, Z, [level], linewidths=1.5, alpha=1, colors='cyan')
+        ax.contour(X, Y, Z, [level], linewidths=1, alpha=1, colors='cyan')
     
     return fig
 
