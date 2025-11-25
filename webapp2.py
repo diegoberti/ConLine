@@ -81,7 +81,7 @@ def generate_heatmap(f, g, x0, y0, d, colormap, center=True, level=0, show_level
         ax.plot(x0, y0, marker='x', color='black', markersize=10, markeredgewidth=2)
     
     if show_level:
-        ax.contour(X, Y, Z, [level], linewidths=2, colors='lime')
+        ax.contour(X, Y, Z, [level], linewidths=2, alpha=1, colors='lime')
     
     return fig
 
